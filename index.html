@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html style="width: 100%; height: 100%; padding: 0;">
+  <head>
+
+  </head>
+  <body style="width: 100%; height: 100%; padding: 0; margin: 0; ">
+    <canvas id="myCanvas" style="width: 100%; height: 100%; padding: 0; margin: 0;"></canvas>
+  </body>
+
+
+
+  <script>
+    const electron = require('electron.js');
+    const Chart = require('chart.js');
+
+    var ctx = document.getElementById('myCanvas').getContext('2d');    
+    var myChart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            borderColor: ['rgba(255, 99, 132, 1)'],
+            borderWidth: 5,
+            showLine: true
+          }]
+        },
+        options: {
+          scales: {
+            xAxes: [{
+              ticks: {
+                display: false
+              }
+            }],
+            yAxes: [{
+              ticks: {
+                min: 0,
+                max: 50
+              }
+            }]
+          },
+          legend: {
+            display: false
+          },
+          animation: {
+              duration: 0 // general animation time
+          },
+          hover: {
+              animationDuration: 0 // duration of animations when hovering an item
+          },
+          responsiveAnimationDuration: 0, // animation duration after a resize
+          elements: {
+            point:{
+              radius: 0
+            }
+          }
+        }
+    });
+
+
+
+
+    electron.ipcRenderer.on('update', (e, arg) => {
+      myChart.data.datasets.forEach((dataset) => {
+        dataset.data = arg.data;
+      });
+      myChart.options.scales.xAxes[0].ticks.min = Date.now() - 10000;
+      myChart.options.scales.xAxes[0].ticks.max = Date.now();
+      myChart.update();
+    })
+  </script>
+</html>
