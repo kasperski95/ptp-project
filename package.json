@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "chart.js": "^2.8.0",
-    "electron": "^4.1.1"
+    "electron": "^4.1.1",
+    "electron-rebuild": "^1.8.4",
+    "serialport": "^7.1.4"
   }
 }
