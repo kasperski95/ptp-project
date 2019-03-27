@@ -4,14 +4,18 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . ptp-project --platform=win32 --arch=x64"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chart.js": "^2.8.0",
-    "electron": "^4.1.1",
-    "electron-rebuild": "^1.8.4",
     "serialport": "^7.1.4"
+  },
+  "devDependencies": {
+    "electron": "^4.1.1",
+    "electron-packager": "^13.1.1",
+    "electron-rebuild": "^1.8.4"
   }
 }
